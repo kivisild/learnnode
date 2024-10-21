@@ -1,0 +1,2 @@
+'npm i', et uuseti node_modules kausta saada.
+Kui pole node_modules, siis saad errori 'ERR_MODULE_NOT_FOUND'.
