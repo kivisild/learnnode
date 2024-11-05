@@ -1,0 +1,38 @@
+    1  cd Documents/GithubProjektid/Kool/
+    2  cd OOP-PolytechnicSchool/
+    3  ls
+    4  cd ..
+    5  git clone https://github.com/kivisild/learnnode
+    6  cd learnnode/
+    7  code .
+    8  npm i
+    9  npm install --save-dev webpack
+   10  node -v
+   11  npm run dev
+   12  npm install webpack-dev-server --save-dev
+   13  npm run start
+   14  npm run start
+   15  npm run dev
+   16  npm run start
+   17  npm run start
+   18  npm run dev
+   19  npm run start
+   20  npm install --save-dev css-loader
+   21  npm run dev
+   22  npm run start
+   23  npm run start
+   24  npm build
+   25  npm run build
+   26  npm run start
+   27  npm run dev
+   28  npm run dev
+   29  npm run build
+   30  npm run start
+   31  npm run build
+   32  npm install css-loader style-loader --save-dev
+   33  npm run build
+   34  npm run build
+   35  npm run build
+   36  npm run start
+   37  history > ./history/history-04-11-24.txt
+   38  history > history.txt
