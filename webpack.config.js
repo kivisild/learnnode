@@ -20,6 +20,20 @@ export default {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.scss$/i,
+        use: ["style-loader",
+           "css-loader",
+           {
+           loader: "sass-loader",
+           options: {
+            sassOptions: {
+              quietDeps: true
+            }
+           }
+           }
+          ]
+      },
     ],
   },
   plugins: [
