@@ -19,6 +19,7 @@ export default async () => {
       },
     });
     pages.push(page);
+    
   });
 
   return {
@@ -76,6 +77,14 @@ export default async () => {
       new HtmlWebpackPlugin({
         filename: 'about.html',
         template: './src/about.njk',
+      }),
+      new HtmlWebpackPlugin({
+        template: "./src/index.njk",
+        filename: "character_23.html",
+        // ma ei tea, mis number ma olen ja eriti ei viitsi järgi uurida
+        templateParameters: {
+          name: "Siim",
+        },
       }),
       ...pages
     ],
