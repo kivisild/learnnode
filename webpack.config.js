@@ -81,7 +81,6 @@ export default async () => {
       new HtmlWebpackPlugin({
         template: "./src/index.njk",
         filename: "character_23.html",
-        // ma ei tea, mis number ma olen ja eriti ei viitsi järgi uurida
         templateParameters: {
           name: "Siim",
         },
