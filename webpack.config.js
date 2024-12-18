@@ -6,7 +6,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default async () => {
 
-  let response = await fetch("https://rickandmortyapi.com/api/character");
+  let response = await fetch("https://rickandmortyapi.com/api/character?page=23");
   let json = await response.json();
   let characters = json.results;
   let pages = [];
@@ -77,13 +77,6 @@ export default async () => {
       new HtmlWebpackPlugin({
         filename: 'about.html',
         template: './src/about.njk',
-      }),
-      new HtmlWebpackPlugin({
-        template: "./src/index.njk",
-        filename: "character_23.html",
-        templateParameters: {
-          name: "Siim",
-        },
       }),
       ...pages
     ],
