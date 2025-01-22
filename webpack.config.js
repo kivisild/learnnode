@@ -24,6 +24,7 @@ export default {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
       },
+
       {
         test: /\.scss$/i,
         use: ["style-loader",
@@ -42,6 +43,8 @@ export default {
         test: /\.vue$/,
         loader: 'vue-loader'
       }
+      
+      
       
     ],
     },
