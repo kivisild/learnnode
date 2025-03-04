@@ -4,8 +4,14 @@ import axios from 'axios';
 
 let joke = ref('');
 
-let response = await axios.get("https://api.chucknorris.io/jokes/random");
-joke.value = response.data.value;
+try{
+    let response = await axios.get("https://api.chucknorris.io/jokes/random");
+    joke.value = response.data.value;
+}
+catch(err){
+    console.log(err)
+}
+
 
 // axios.get("https://api.chucknorris.io/jokes/random").then(res => {
 //     joke.value = response.data.value;
@@ -16,6 +22,8 @@ joke.value = response.data.value;
 //axios.get("https://api.chucknorris.io/jokes/random").then(res => {
     //joke.value = response.data.value;
 //});
+
+
 </script>
 
 <template>
