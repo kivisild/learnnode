@@ -1,6 +1,6 @@
 <script setup>
 import axios from 'axios';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import CharacterCard from '../components/CharacterCard.vue';
 import SimplePagination from '../components/SimplePagination.vue';
 import Pagination from '../components/Pagination.vue';
@@ -58,6 +58,17 @@ async function search() {
     }, 1000)
     
 }
+
+onMounted(() =>{
+    document.addEventListener('scroll', () => {
+        if(window.scrollY + window.innerHeight >  document.body.clientHeight - 300){
+            next();
+        }
+    })
+    
+})
+
+
 </script>
 
 <template>
