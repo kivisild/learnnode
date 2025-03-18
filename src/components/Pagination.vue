@@ -4,7 +4,7 @@ let { info, current } = defineProps(['info', 'current']);
 
 let pageNumbers = computed(() => {
     let pages = [];
-    for (let i = 1; i <= 3; i++) {
+    for (let i = 1; i <= 3 && i<=info.pages; i++) {
         pages[i] = i;
     }
     if (current > 2){
@@ -16,7 +16,7 @@ let pageNumbers = computed(() => {
             pages[i] = i;
         }
     }
-    if (current > info.pages-2){
+    if (current < info.pages-2){
         pages.push('...');
     }
     
@@ -34,12 +34,21 @@ console.log(pageNumbers.value)
 
 <template>
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <a href="#" class="pagination-previous">Previous</a>
-        <a href="#" class="pagination-next">Next page</a>
+        <button @click="$emit('prev')" :disabled="!info.prev" class="pagination-previous">Previous</button>
+        <button @click="$emit('next')" :disabled="!info.next" class="pagination-next">Next page</button>
         <ul class="pagination-list">
             <li v-for="page in pageNumbers">
                 <span class="pagination-ellipsis" v-if="page === '...'">&hellip;</span>
-                <a href="#" class="pagination-link" aria-label="Goto page 1">{{ page }}</a>
+
+                <a class="pagination-link is-current"
+                :aria-label="`Goto page ${page}`"
+                aria-current="page"
+                v-else-if="page === current">{{ page }}</a>
+
+                <a @click="$emit('page', page)"
+                class="pagination-link"
+                :aria-label="`Goto page ${page}`"
+                v-else>{{ page }}</a>
             </li>
             <!-- <li><span class="pagination-ellipsis">&hellip;</span></li>
             <li><a href="#" class="pagination-link" aria-label="Goto page 45">45</a></li>
