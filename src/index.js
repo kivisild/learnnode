@@ -8,12 +8,14 @@ import Chuck from './pages/Chuck.vue';
 import RickAndMorty from './pages/RickAndMorty.vue';
 
 import App from "./App.vue";
+import CookieClicker from './pages/CookieClicker.vue';
 
 const routes = [
     {path: '/', component: ToDo, name: 'ToDo'},
     {path: '/modals', component: Modals, name: 'Modals'},
     {path: '/chuck', component: Chuck, name: 'Chuck'},
-    {path: '/rickandmorty', component: RickAndMorty, name: "Rick and Morty"}
+    {path: '/rickandmorty', component: RickAndMorty, name: "Rick and Morty"},
+    {path: "/cookieCliker", component: CookieClicker, name: "Cookie Clicker", meta: {container: false}},
 
 ]
 const router = createRouter({
