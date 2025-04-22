@@ -1,95 +1,93 @@
 <script setup>
+
 import axios from 'axios';
-import { ref, onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import CharacterCard from '../components/CharacterCard.vue';
 import SimplePagination from '../components/SimplePagination.vue';
 import Pagination from '../components/Pagination.vue';
 
-let characters = ref([]);
-const info = ref([]);
+const characters = ref([]);
+const info = ref({});
 const currentPage = ref(1);
-const error=ref('');
 const searchValue = ref('');
-
+const error = ref('');
 let searchTimeout = null;
 
-await getCharacters("https://rickandmortyapi.com/api/character");
 
-async function getCharacters(url) {
-    try{let response = await axios.get(url, {
-        params: {
-            page: currentPage.value,
-            name: searchValue.value
-        }
-    });
-    console.log(response.data);
-    characters.value = response.data.results;
-    info.value = response.data.info;}
-    catch(err){
+await getCharacters('https://rickandmortyapi.com/api/character');
+
+
+async function getCharacters() {
+    try {
+        let response = await axios.get('https://rickandmortyapi.com/api/character', {
+            params: {
+                page: currentPage.value,
+                name: searchValue.value,
+            }
+        });
+        console.log(response.data);
+        characters.value.push(...response.data.results);
+        info.value = response.data.info;
+    } catch(err) {
         console.log(err);
         error.value = 'No results found';
-        characters.value = [];
-
-
+        info.value = null;
     }
 }
 
 async function next() {
     currentPage.value++;
-    await getCharacters("https://rickandmortyapi.com/api/character");
+    await getCharacters();
 }
 
 async function prev() {
     currentPage.value--;
-    await getCharacters("https://rickandmortyapi.com/api/character");
+    await getCharacters();
 }
 
 async function page(page) {
     currentPage.value = page;
-    await getCharacters("https://rickandmortyapi.com/api/character");
+    await getCharacters();
 }
 
-async function search() {
+async function search(){
     clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(async () =>{
-        error.value = '';
+    searchTimeout = setTimeout(async () => {
+        error.value='';
         currentPage.value = 1;
         characters.value = [];
-        await getCharacters("https://rickandmortyapi.com/api/character");
-    }, 1000)
-    
+        await getCharacters();
+    }, 1000);
+
 }
 
-onMounted(() =>{
+onMounted(() => {
     document.addEventListener('scroll', () => {
-        if(window.scrollY + window.innerHeight >  document.body.clientHeight - 300){
+        if(window.scrollY + window.innerHeight > document.body.clientHeight - 300 ) {
             next();
         }
     })
     
-})
-
+});
 
 </script>
-
 <template>
     <div class="field has-addons">
         <div class="control is-expanded">
-            <input v-model="searchValue" @input="search" class="input" type="text" placeholder="Find character">
+            <input @input="search" v-model="searchValue" class="input" type="text" placeholder="Find character">
         </div>
         <div class="control">
-            <button @click="search" class="button is-info">Search</button>
+            <button @click="search" class="button is-info">
+                Search
+            </button>
         </div>
     </div>
 
-    
-    <Pagination v-if="info" :info="info" :current="currentPage" @next="next" @prev="prev" @page="page"></Pagination>
+   
     <div class="columns is-multiline">
         <div v-for="character in characters" class="column is-one-quarter">
             <CharacterCard :character="character"></CharacterCard>
         </div>
-        
     </div>
     <h1 v-if="error" class="is-size-1">{{ error }}</h1>
-
 </template>
