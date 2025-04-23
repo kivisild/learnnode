@@ -8,7 +8,8 @@
     "dev": "webpack --mode=development",
     "build": "webpack --mode=production",
     "start": "webpack serve --mode=development",
-    "deploy": "npm run build && surge ./dist superlahedomeen.surge.sh"
+    "deploy": "npm run build && surge ./dist superlahedomeen.surge.sh",
+    "server": "nodemon bin/server.js -w bin/server.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
   "dependencies": {
     "axios": "^1.7.9",
     "boxen": "^8.0.1",
+    "express": "^5.1.0",
     "leaflet": "^1.9.4",
     "vue-router": "^4.5.0"
   },
@@ -23,6 +25,7 @@
     "bulma": "^1.0.2",
     "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.3",
+    "nodemon": "^3.1.10",
     "sass": "^1.81.0",
     "sass-loader": "^16.0.3",
     "style-loader": "^4.0.0",
