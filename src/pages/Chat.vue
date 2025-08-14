@@ -9,15 +9,17 @@ messages.value = res.data;
 
 await longpoll();
 
-async function longpoll(){
+function longpoll(){
     let date = messages.value[messages.value.length-1]?.date ?? null;
-    let res = await axios.get('http://localhost:3000/', {
+    axios.get('http://localhost:3000/longpoll', {
     params: {
         date: new Date(date)
     }
+}).then(res => {
+    messages.value.push(...res.data);
+    longpoll();
 });
-messages.value.push(...res.data);
-await longpoll();
+
 }
 
 
