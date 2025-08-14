@@ -4,9 +4,12 @@
 let messages = ref([]);
 let input = ref('');
 
+let res = await axios.get('http://localhost:3000');
+messages.value = res.data;
 
+await longpoll();
 
-setInterval(async () => {
+async function longpoll(){
     let date = messages.value[messages.value.length-1]?.date ?? null;
     let res = await axios.get('http://localhost:3000/', {
     params: {
@@ -14,8 +17,10 @@ setInterval(async () => {
     }
 });
 messages.value.push(...res.data);
+await longpoll();
+}
 
-}, 1000)
+
 
 async function send(){
     let res = await axios.post('http://localhost:3000/', {
