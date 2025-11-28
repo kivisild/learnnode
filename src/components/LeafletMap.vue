@@ -20,6 +20,9 @@ onMounted(() => {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
     var marker = L.marker([59.42680, 24.74348]).addTo(map);
+    var homeMarker = L.marker([59.390434,24.652186]).addTo(map);
+    var polygoncoords = [[59.390276, 24.652524], [59.390269, 24.651907], [59.390538, 24.651912], [59.390543, 24.652433]];
+    var polygon = L.polygon(polygoncoords, {color: 'red'}).addTo(map);
 });
 
 watch(() => center, (center, oldCenter) => {
